@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  home-app:
+    build:
+      context: ./home-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - car-app
+      - cruise-app
+      - hotel-app
+    networks:
+      - microfrontend-network
+
+  car-app:
+    build:
+      context: ./car-app
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  cruise-app:
+    build:
+      context: ./cruise-app
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  hotel-app:
+    build:
+      context: ./hotel-app
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+networks:
+  microfrontend-network:
+    driver: bridge

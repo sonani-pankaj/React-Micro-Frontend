@@ -1,0 +1,87 @@
+services:
+  home-app:
+    build:
+      context: ./home-app
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./home-app/src:/app/src
+      - ./home-app/public:/app/public
+      - ./home-app/webpack.config.js:/app/webpack.config.js
+    depends_on:
+      - car-app
+      - cruise-app
+      - hotel-app
+    networks:
+      - microfrontend-network
+    command: npm start
+    develop:
+      watch:
+        - action: sync
+          path: ./home-app/src
+          target: /app/src
+        - action: rebuild
+          path: ./home-app/package.json
+
+  car-app:
+    build:
+      context: ./car-app
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./car-app/src:/app/src
+      - ./car-app/public:/app/public
+      - ./car-app/webpack.config.js:/app/webpack.config.js
+    networks:
+      - microfrontend-network
+    command: npm start
+
+  cruise-app:
+    build:
+      context: ./cruise-app
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./cruise-app/src:/app/src
+      - ./cruise-app/public:/app/public
+      - ./cruise-app/webpack.config.js:/app/webpack.config.js
+    networks:
+      - microfrontend-network
+    command: npm start
+
+  hotel-app:
+    build:
+      context: ./hotel-app
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./hotel-app/src:/app/src
+      - ./hotel-app/public:/app/public
+      - ./hotel-app/webpack.config.js:/app/webpack.config.js
+    networks:
+      - microfrontend-network
+    command: npm start
+
+networks:
+  microfrontend-network:
+    driver: bridge
