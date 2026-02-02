@@ -18,7 +18,7 @@ npm install
 npm start
 ```
 
-Access at: http://localhost:3004
+Access at: <http://localhost:3004>
 
 ## Exposed Modules
 
@@ -27,6 +27,7 @@ Access at: http://localhost:3004
 
 ## State (flightStore.js)
 
+```d
 | Property | Type | Description |
 |----------|------|-------------|
 | searchQuery | string | Current search query |
@@ -38,6 +39,7 @@ Access at: http://localhost:3004
 | tripType | string | 'roundtrip' or 'oneway' |
 | cabinClass | string | 'economy', 'business', or 'first' |
 | bundledWith | string | Service this flight is bundled with |
+```
 
 ## Docker
 
