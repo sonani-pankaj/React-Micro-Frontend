@@ -35,9 +35,7 @@ The development setup uses:
 When you edit files locally:
 
 1. **Edit any file** in `src/` or `public/` directories
-   ```
-   # Example: Edit home-app/src/components/Search/SearchWidget.js
-   ```
+   - Example: Edit home-app/src/components/Search/SearchWidget.js
 
 2. **Webpack detects the change** automatically via polling
 
@@ -78,10 +76,10 @@ docker-compose -f docker-compose.dev.yml up -d --build
 
 ### Access Applications
 
-- Home App: http://localhost:3000
-- Car App: http://localhost:3001
-- Cruise App: http://localhost:3002
-- Hotel App: http://localhost:3003
+- Home App: <http://localhost:3000>
+- Car App: <http://localhost:3001>
+- Cruise App: <http://localhost:3002>
+- Hotel App: <http://localhost:3003>
 
 ## Production Build (No Hot Reload)
 
@@ -97,7 +95,7 @@ docker-compose up --build
 
 ## File Structure
 
-```
+```d
 MicroFrontEnd/
 ├── docker-compose.yml       # Production (Nginx)
 ├── docker-compose.dev.yml   # Development (Hot Reload)
@@ -122,30 +120,36 @@ MicroFrontEnd/
 ## Troubleshooting Hot Reload
 
 **Changes not reflecting:**
+
 1. Check if webpack is detecting changes in logs
 2. Ensure volume mounts are correct
 3. Try hard refresh in browser (Ctrl+Shift+R)
 
 **File watching not working:**
+
 - The config uses `usePolling: true` for Docker compatibility
 - This works on Windows, Mac, and Linux
 
 **Port conflicts:**
+
 - Ensure ports 3000-3003 are not in use locally
 - Stop local dev servers before starting Docker
 
 **Performance on Windows/Mac:**
+
 - File watching with polling can be slower
 - Consider running locally without Docker for faster development
 
 ## Best Practices
 
 1. **Use Dev Mode for Development**
+
    ```bash
    docker-compose -f docker-compose.dev.yml up
    ```
 
 2. **Use Prod Mode for Testing**
+
    ```bash
    docker-compose up --build
    ```
