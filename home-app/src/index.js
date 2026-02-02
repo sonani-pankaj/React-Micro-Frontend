@@ -259,6 +259,7 @@ const REMOTE_COMPONENTS = {
   car: { name: 'Car App', color: '#3498db' },
   cruise: { name: 'Cruise App', color: '#9b59b6' },
   hotel: { name: 'Hotel App', color: '#e74c3c' },
+  bundle: { name: 'Bundle Builder', color: '#f39c12', isBundle: true },
 };
 
 const App = () => {
@@ -272,15 +273,18 @@ const App = () => {
   // Track tab change to force re-check of remote availability
   const [tabChangeCount, setTabChangeCount] = useState({});
   
-  // Access remote store state for current active tab
-  const { state: remoteState, isLoading: storeLoading, error: storeError } = useRemoteStore(activeTab);
+  // Get current tab config
+  const { name, color, isBundle } = REMOTE_COMPONENTS[activeTab];
   
-  // Sync search query with remote store
-  useSyncSearchWithRemote(activeTab, searchQuery);
+  // Access remote store state for current active tab (skip for bundle)
+  const { state: remoteState, isLoading: storeLoading, error: storeError } = useRemoteStore(isBundle ? null : activeTab);
+  
+  // Sync search query with remote store (skip for bundle)
+  useSyncSearchWithRemote(isBundle ? null : activeTab, searchQuery);
 
   // Handle search callback
-  const handleSearch = ({ type, query }) => {
-    console.log(`Searching in ${type}: ${query}`);
+  const handleSearch = ({ type, query, types }) => {
+    console.log(`Searching in ${type}: ${query}`, types ? `(services: ${types.join(', ')})` : '');
     setSearchQuery(query);
     setCurrentSearch(type, query);
   };
@@ -303,7 +307,6 @@ const App = () => {
     }
   }, [remoteState, activeTab]);
 
-  const { name, color } = REMOTE_COMPONENTS[activeTab];
   const tabKey = `${activeTab}-${tabChangeCount[activeTab] || 0}`;
 
   return (
@@ -315,13 +318,15 @@ const App = () => {
       {/* Search Widget with Tabs */}
       <SearchWidget onSearch={handleSearch} onTabChange={handleTabChange} />
       
-      {/* Remote Store State Display */}
-      <StateDebugger 
-        remoteState={remoteState}
-        appName={name}
-        isLoading={storeLoading}
-        error={storeError}
-      />
+      {/* Remote Store State Display - hide for bundle tab */}
+      {!isBundle && (
+        <StateDebugger 
+          remoteState={remoteState}
+          appName={name}
+          isLoading={storeLoading}
+          error={storeError}
+        />
+      )}
       
       {/* Active Remote App Content */}
       <div style={{ 
@@ -339,7 +344,7 @@ const App = () => {
           fontSize: '18px',
           fontWeight: '600'
         }}>
-          {name} Content
+          {name} {isBundle ? '' : 'Content'}
         </div>
         <div style={{ padding: '24px' }}>
           {searchQuery && (
@@ -353,13 +358,26 @@ const App = () => {
               🔍 Searching for: <strong>{searchQuery}</strong>
             </div>
           )}
-          <ErrorBoundary name={name} appKey={tabKey} key={tabKey}>
-            <RemoteComponent 
-              key={tabKey}
-              appName={activeTab}
-              displayName={name}
-            />
-          </ErrorBoundary>
+          {isBundle ? (
+            <div style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+              <div style={{ fontSize: '48px', marginBottom: '16px' }}>📦</div>
+              <h3 style={{ margin: '0 0 8px 0', color: '#333' }}>Build Your Own Itinerary</h3>
+              <p style={{ margin: 0 }}>
+                Select services above (Car, Hotel, Cruise) and add Flight to create your custom travel bundle.
+              </p>
+              <p style={{ margin: '12px 0 0 0', fontSize: '14px', color: '#888' }}>
+                ✈️ Flight is available only when bundled with another service.
+              </p>
+            </div>
+          ) : (
+            <ErrorBoundary name={name} appKey={tabKey} key={tabKey}>
+              <RemoteComponent 
+                key={tabKey}
+                appName={activeTab}
+                displayName={name}
+              />
+            </ErrorBoundary>
+          )}
         </div>
       </div>
     </div>

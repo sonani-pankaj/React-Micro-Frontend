@@ -108,6 +108,24 @@ module.exports = {
             });
           };
           document.head.appendChild(script);
+        })`,
+        'flight-app': `promise new Promise(resolve => {
+          const remoteUrl = 'http://localhost:3004/remoteEntry.js';
+          const script = document.createElement('script');
+          script.src = remoteUrl;
+          script.onload = () => {
+            resolve({
+              get: (request) => window.flightApp.get(request),
+              init: (arg) => { try { return window.flightApp.init(arg); } catch(e) { console.log('flight-app already initialized'); } }
+            });
+          };
+          script.onerror = () => {
+            resolve({
+              get: () => Promise.resolve(() => ({ default: () => null })),
+              init: () => {}
+            });
+          };
+          document.head.appendChild(script);
         })`
       },
       shared: { 
