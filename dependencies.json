@@ -1,0 +1,158 @@
+{
+  "name": "microfrontend-dependencies",
+  "description": "Centralized dependency versions for all micro frontend apps",
+  "lastUpdated": "2026-02-01",
+  "dependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "prop-types": "^15.8.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-scripts": "^0.0.0",
+    "web-vitals": "^2.1.4",
+    "zustand": "^5.0.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
+    "@babel/preset-react": "^7.28.5",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.6",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.3"
+  },
+  "appVersions": {
+    "home-app": "0.1.0",
+    "car-app": "0.1.0",
+    "cruise-app": "0.1.0",
+    "hotel-app": "0.1.0",
+    "flight-app": "0.1.0"
+  },
+  "usageByApp": {
+    "home-app": {
+      "dependencies": [
+        "@testing-library/dom",
+        "prop-types",
+        "react",
+        "react-dom",
+        "react-scripts",
+        "web-vitals",
+        "zustand"
+      ],
+      "devDependencies": [
+        "@babel/core",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "babel-loader",
+        "html-webpack-plugin",
+        "webpack",
+        "webpack-cli",
+        "webpack-dev-server"
+      ]
+    },
+    "car-app": {
+      "dependencies": [
+        "@testing-library/dom",
+        "react",
+        "react-dom",
+        "react-scripts",
+        "web-vitals",
+        "zustand"
+      ],
+      "devDependencies": [
+        "@babel/core",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "babel-loader",
+        "html-webpack-plugin",
+        "webpack",
+        "webpack-cli",
+        "webpack-dev-server"
+      ]
+    },
+    "cruise-app": {
+      "dependencies": [
+        "@testing-library/dom",
+        "react",
+        "react-dom",
+        "react-scripts",
+        "web-vitals",
+        "zustand"
+      ],
+      "devDependencies": [
+        "@babel/core",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "babel-loader",
+        "css-loader",
+        "html-webpack-plugin",
+        "style-loader",
+        "webpack",
+        "webpack-cli",
+        "webpack-dev-server"
+      ]
+    },
+    "hotel-app": {
+      "dependencies": [
+        "@testing-library/dom",
+        "react",
+        "react-dom",
+        "react-scripts",
+        "web-vitals",
+        "zustand"
+      ],
+      "devDependencies": [
+        "@babel/core",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "babel-loader",
+        "css-loader",
+        "html-webpack-plugin",
+        "style-loader",
+        "webpack",
+        "webpack-cli",
+        "webpack-dev-server"
+      ]
+    },
+    "flight-app": {
+      "dependencies": [
+        "@testing-library/dom",
+        "react",
+        "react-dom",
+        "react-scripts",
+        "web-vitals",
+        "zustand"
+      ],
+      "devDependencies": [
+        "@babel/core",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "babel-loader",
+        "html-webpack-plugin",
+        "webpack",
+        "webpack-cli",
+        "webpack-dev-server"
+      ]
+    }
+  }
+}

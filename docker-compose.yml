@@ -13,6 +13,7 @@ services:
       - car-app
       - cruise-app
       - hotel-app
+      - flight-app
     networks:
       - microfrontend-network
 
@@ -44,6 +45,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3003:3003"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  flight-app:
+    build:
+      context: ./flight-app
+      dockerfile: Dockerfile
+    ports:
+      - "3004:3004"
     environment:
       - NODE_ENV=production
     networks:

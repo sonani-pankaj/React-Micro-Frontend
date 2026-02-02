@@ -17,6 +17,7 @@ services:
       - car-app
       - cruise-app
       - hotel-app
+      - flight-app
     networks:
       - microfrontend-network
     command: npm start
@@ -78,6 +79,24 @@ services:
       - ./hotel-app/src:/app/src
       - ./hotel-app/public:/app/public
       - ./hotel-app/webpack.config.js:/app/webpack.config.js
+    networks:
+      - microfrontend-network
+    command: npm start
+
+  flight-app:
+    build:
+      context: ./flight-app
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3004:3004"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./flight-app/src:/app/src
+      - ./flight-app/public:/app/public
+      - ./flight-app/webpack.config.js:/app/webpack.config.js
     networks:
       - microfrontend-network
     command: npm start
