@@ -7,6 +7,7 @@
 let carStoreModule = null;
 let cruiseStoreModule = null;
 let hotelStoreModule = null;
+let flightStoreModule = null;
 
 // Load remote store dynamically
 const loadRemoteStore = async (appName) => {
@@ -29,6 +30,12 @@ const loadRemoteStore = async (appName) => {
           hotelStoreModule = await import('hotel-app/store');
         }
         return hotelStoreModule.useHotelStore;
+      
+      case 'flight':
+        if (!flightStoreModule) {
+          flightStoreModule = await import('flight-app/store');
+        }
+        return flightStoreModule.useFlightStore;
       
       default:
         return null;
@@ -68,4 +75,5 @@ export const clearRemoteStoreCaches = () => {
   carStoreModule = null;
   cruiseStoreModule = null;
   hotelStoreModule = null;
+  flightStoreModule = null;
 };

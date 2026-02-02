@@ -1,0 +1,9 @@
+{
+  "short_name": "Flight App",
+  "name": "Flight Booking Micro Frontend",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#27ae60",
+  "background_color": "#ffffff"
+}
